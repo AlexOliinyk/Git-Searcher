@@ -11,7 +11,11 @@ import SwiftUI
 struct Git_SearcherApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            SearchView()
+            SearchView(store: .init(
+                initialState: .init(),
+                reducer: searchReducer,
+                environment: .init(repositorySearch: repositoryEffect, mainQueue: .main)))
         }
     }
 }

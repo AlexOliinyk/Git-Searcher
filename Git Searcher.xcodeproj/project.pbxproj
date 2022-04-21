@@ -7,18 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		114A0374280DFE1B004B41F5 /* RepositoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114A0373280DFE1B004B41F5 /* RepositoryModel.swift */; };
 		11B6E0682809769300527147 /* Git_SearcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6E0672809769300527147 /* Git_SearcherApp.swift */; };
-		11B6E06A2809769300527147 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6E0692809769300527147 /* ContentView.swift */; };
+		11B6E06A2809769300527147 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6E0692809769300527147 /* SearchView.swift */; };
 		11B6E06C2809769400527147 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B6E06B2809769400527147 /* Assets.xcassets */; };
 		11B6E06F2809769400527147 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B6E06E2809769400527147 /* Preview Assets.xcassets */; };
+		11B6E077280978EB00527147 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 11B6E076280978EB00527147 /* ComposableArchitecture */; };
+		11B6E07E280997DE00527147 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6E07D280997DE00527147 /* SearchBarView.swift */; };
+		11B6E08128099CC900527147 /* UIAplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6E08028099CC900527147 /* UIAplication.swift */; };
+		11DE3CA2280EA34300BDBF78 /* RepositoryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE3CA1280EA34300BDBF78 /* RepositoryEffect.swift */; };
+		11DE3CA4280ECC7800BDBF78 /* RepositoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE3CA3280ECC7800BDBF78 /* RepositoryItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		114A0373280DFE1B004B41F5 /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
 		11B6E0642809769300527147 /* Git Searcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Git Searcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B6E0672809769300527147 /* Git_SearcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Git_SearcherApp.swift; sourceTree = "<group>"; };
-		11B6E0692809769300527147 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		11B6E0692809769300527147 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		11B6E06B2809769400527147 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11B6E06E2809769400527147 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		11B6E07D280997DE00527147 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		11B6E08028099CC900527147 /* UIAplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAplication.swift; sourceTree = "<group>"; };
+		11DE3CA1280EA34300BDBF78 /* RepositoryEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryEffect.swift; sourceTree = "<group>"; };
+		11DE3CA3280ECC7800BDBF78 /* RepositoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11B6E077280978EB00527147 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +63,13 @@
 		11B6E0662809769300527147 /* Git Searcher */ = {
 			isa = PBXGroup;
 			children = (
+				11B6E07F28099CA000527147 /* Extensions */,
 				11B6E0672809769300527147 /* Git_SearcherApp.swift */,
-				11B6E0692809769300527147 /* ContentView.swift */,
+				11B6E0692809769300527147 /* SearchView.swift */,
+				11B6E07D280997DE00527147 /* SearchBarView.swift */,
+				11DE3CA3280ECC7800BDBF78 /* RepositoryItemView.swift */,
+				114A0373280DFE1B004B41F5 /* RepositoryModel.swift */,
+				11DE3CA1280EA34300BDBF78 /* RepositoryEffect.swift */,
 				11B6E06B2809769400527147 /* Assets.xcassets */,
 				11B6E06D2809769400527147 /* Preview Content */,
 			);
@@ -65,6 +82,14 @@
 				11B6E06E2809769400527147 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		11B6E07F28099CA000527147 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				11B6E08028099CC900527147 /* UIAplication.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +108,9 @@
 			dependencies = (
 			);
 			name = "Git Searcher";
+			packageProductDependencies = (
+				11B6E076280978EB00527147 /* ComposableArchitecture */,
+			);
 			productName = "Git Searcher";
 			productReference = 11B6E0642809769300527147 /* Git Searcher.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +139,9 @@
 				Base,
 			);
 			mainGroup = 11B6E05B2809769300527147;
+			packageReferences = (
+				11B6E075280978EB00527147 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 11B6E0652809769300527147 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,7 +168,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11B6E06A2809769300527147 /* ContentView.swift in Sources */,
+				11B6E07E280997DE00527147 /* SearchBarView.swift in Sources */,
+				114A0374280DFE1B004B41F5 /* RepositoryModel.swift in Sources */,
+				11DE3CA4280ECC7800BDBF78 /* RepositoryItemView.swift in Sources */,
+				11B6E08128099CC900527147 /* UIAplication.swift in Sources */,
+				11B6E06A2809769300527147 /* SearchView.swift in Sources */,
+				11DE3CA2280EA34300BDBF78 /* RepositoryEffect.swift in Sources */,
 				11B6E0682809769300527147 /* Git_SearcherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +375,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		11B6E075280978EB00527147 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		11B6E076280978EB00527147 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B6E075280978EB00527147 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 11B6E05C2809769300527147 /* Project object */;
 }
