@@ -20,6 +20,8 @@ struct SearchBarView: View {
             
             TextField("Search by repository name...", text: $searchText)
                 .foregroundColor(Color.accentColor)
+                .keyboardType(.webSearch)
+                .disableAutocorrection(true)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
                         .padding()
