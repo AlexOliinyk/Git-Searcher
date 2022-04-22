@@ -62,7 +62,7 @@ let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment> { stat
         state.status = .loading
         return environment
             .repositorySearch(searchText)
-//            .receive(on: environment.mainQueue)
+        //            .receive(on: environment.mainQueue)
             .catchToEffect()
             .map(SearchAction.dataIsLoaded)
             .debounce(id: MyRepositoryID(), for: .seconds(0.5), scheduler: environment.mainQueue)
@@ -87,38 +87,46 @@ struct SearchView: View {
     
     var body: some View {
         WithViewStore(store) { viewStore in
-            VStack {
-                SearchBarView(searchText: viewStore.binding(get: { state in
-                    state.searchText
-                }, send: { searchText in
-                        .search(searchText)
-                }))
-                .padding([.top, .leading, .trailing])
-                switch viewStore.state.status {
-                case .idle:
-                    Spacer()
-                    Text("Start typing at the search bar above")
-                        .foregroundColor(Color.secondary)
-                    Spacer()
-                case .loading:
-                    Spacer()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                    Spacer()
-                case .dataLoaded(let models):
-                    List(models) { model in
-                        RepositoryItemView(repository: model)
+            NavigationView {
+                VStack {
+                    SearchBarView(searchText: viewStore.binding(get: { state in
+                        state.searchText
+                    }, send: { searchText in
+                            .search(searchText)
+                    }))
+                    .padding([.top, .leading, .trailing])
+                    switch viewStore.state.status {
+                    case .idle:
+                        Spacer()
+                        Text("Start typing at the search bar above")
+                            .foregroundColor(Color.secondary)
+                        Spacer()
+                    case .loading:
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                        Spacer()
+                    case .dataLoaded(let models):
+                        List(models) { model in
+                            NavigationLink(destination: RepositoryDetailView(model: model), label: {
+                                RepositoryItemView(repository: model)
+                            })
+                        }
+                        .listStyle(PlainListStyle())
+                        
+                    case .emptyResult:
+                        Spacer()
+                        Text("We didn't find anything for you...")
+                            .foregroundColor(Color.secondary)
+                        Spacer()
+                    case .error(let error):
+                        Spacer()
+                        Text(error.localizedDescription)
+                        Spacer()
                     }
-                case .error(let error):
-                    Spacer()
-                    Text(error.localizedDescription)
-                    Spacer()
-                case .emptyResult:
-                    Spacer()
-                    Text("We didn't find anything for you...")
-                        .foregroundColor(Color.secondary)
-                    Spacer()
                 }
+                .navigationTitle("Search Repository")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
