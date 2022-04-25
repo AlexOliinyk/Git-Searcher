@@ -10,7 +10,8 @@ import ComposableArchitecture
 import Combine
 
 func repositoryEffect(searchText: String) -> Effect<[RepositoryModel], SearchError> {
-    guard let url = URL(string: "https://api.github.com/search/repositories?q=" + searchText.lowercased()) else {
+    let escapedString = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? searchText
+    guard let url = URL(string: "https://api.github.com/search/repositories?q=" + escapedString) else {
         fatalError("Error")
     }
     

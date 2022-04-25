@@ -12,7 +12,7 @@ struct RepositoryDetailView: View {
     
     var body: some View {
         List {
-            Section("User Image") {
+            Section() {
                 AsyncImage(url: model.owner.avatarUrl.flatMap { URL(string: $0) }) { image in
                     image.resizable()
                 } placeholder: {
