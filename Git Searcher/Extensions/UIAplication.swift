@@ -1,5 +1,5 @@
 //
-//  UIAplication.swift
+//  UIApplication.swift
 //  Git Searcher
 //
 //  Created by Oleksandr Oliinyk on 15.04.2022.

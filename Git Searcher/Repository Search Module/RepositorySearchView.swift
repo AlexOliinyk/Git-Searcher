@@ -9,81 +9,8 @@ import SwiftUI
 import ComposableArchitecture
 import Combine
 
-enum SearchError: Error {
-    case downloadError
-    case decodingError
-}
-
-
-//struct SearchError: Error, Equatable {
-//    static func == (lhs: SearchError, rhs: SearchError) -> Bool {
-//        false
-//    }
-//
-//    let internalError: Error
-//}
-
-enum SearchAction: Equatable {
-    
-    case search(String)
-    case dataIsLoaded(Result<[RepositoryModel], SearchError>)
-}
-
-struct SearchState: Equatable {
-    var searchText: String = ""
-    var status: Status = .idle
-    
-    enum Status: Equatable {
-        case idle
-        case loading
-        case dataLoaded([RepositoryModel])
-        case emptyResult
-        case error(SearchError)
-    }
-}
-
-struct SearchEnvironment {
-    var repositorySearch: (String) -> Effect<[RepositoryModel], SearchError>
-    var mainQueue: DispatchQueue
-}
-
-let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment> { state, action, environment in
-    
-    switch action {
-    case .search(let searchText):
-        
-        struct MyRepositoryID: Hashable {}
-        
-        state.searchText = searchText
-        if searchText.isEmpty {
-            state.status = .idle
-            return .none
-        }
-        state.status = .loading
-        return environment
-            .repositorySearch(searchText)
-        //            .receive(on: environment.mainQueue)
-            .catchToEffect()
-            .map(SearchAction.dataIsLoaded)
-            .debounce(id: MyRepositoryID(), for: .seconds(0.5), scheduler: environment.mainQueue)
-    case .dataIsLoaded(let result):
-        switch result {
-        case .success(let results):
-            if results.count > 0 {
-                state.status = .dataLoaded(results)
-            } else {
-                state.status = .emptyResult
-            }
-        case .failure(let error):
-            state.status = .error(error)
-        }
-        return .none
-    }
-}
-    .debug()
-
-struct SearchView: View {
-    let store: Store<SearchState, SearchAction>
+struct RepositorySearchView: View {
+    let store: Store<SearchState, RepositorySearchAction>
     
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -135,13 +62,13 @@ struct SearchView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SearchView(store: .init(
+            RepositorySearchView(store: .init(
                 initialState: .init(),
                 reducer: searchReducer,
                 environment: .init(repositorySearch: dummyRepositorySearchEffect, mainQueue: .main)))
             .preferredColorScheme(.light)
             
-            SearchView(store: .init(
+            RepositorySearchView(store: .init(
                 initialState: .init(searchText: "", status: .loading),
                 reducer: searchReducer,
                 environment: .init(repositorySearch: dummyRepositorySearchErrorEffect, mainQueue: .main)))

@@ -12,7 +12,7 @@ struct Git_SearcherApp: App {
     var body: some Scene {
         WindowGroup {
 //            SearchView()
-            SearchView(store: .init(
+            RepositorySearchView(store: .init(
                 initialState: .init(),
                 reducer: searchReducer,
                 environment: .init(repositorySearch: repositoryEffect, mainQueue: .main)))
