@@ -35,7 +35,7 @@ struct RepositorySearchView: View {
                         Spacer()
                     case .dataLoaded(let models):
                         List(models) { model in
-                            NavigationLink(destination: RepositoryDetailView(model: model), label: {
+                            NavigationLink(destination: RepositoryDetailsView(model: model), label: {
                                 RepositoryItemView(repository: model)
                             })
                         }
