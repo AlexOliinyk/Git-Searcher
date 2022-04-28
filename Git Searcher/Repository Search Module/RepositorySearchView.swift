@@ -36,9 +36,9 @@ struct RepositorySearchView: View {
                     case .dataLoaded(let models):
                         List(models) { model in
                             NavigationLink(destination: RepositoryDetailsView(store: .init(
-                                                                                initialState: .init(model: model),
+                                initialState: .init(model: model, status: .idle),
                                                                                 reducer: RepositoryDetailsReducer,
-                                                                                environment: .init())),
+                                environment: .init(getReadMe: readMeEffect, mainQueue: .main))),
                                            label: {
                                 RepositoryItemView(repository: model)
                             })

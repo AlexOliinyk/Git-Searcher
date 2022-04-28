@@ -31,6 +31,28 @@ func repositoryEffect(searchText: String) -> Effect<[RepositoryModel], SearchErr
         .eraseToEffect()
 }
 
+func readMeEffect(userName: String, repoName: String) -> Effect<String, SearchError> {
+    let stringUrl = "https://api.github.com/repos/\(userName)/\(repoName)/readme"
+//    let escapedString = stringUrl.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+    guard let url = URL(string: stringUrl) else {
+        fatalError("Error")
+    }
+    
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    
+    return URLSession.shared.dataTaskPublisher(for: url)
+        .mapError { _ in SearchError.downloadError }
+        .map { data, _ in data }
+        .decode(type: ReadMe.self, decoder: decoder)
+        .map { $0.text }
+        .mapError { inlineError in
+            debugPrint(inlineError)
+            return SearchError.decodingError
+        }
+        .eraseToEffect()
+}
+
 
 func dummyRepositorySearchEffect(searchText: String) -> Effect<[RepositoryModel], SearchError> {
    let result = repositoriesMock.filter {

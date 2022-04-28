@@ -8,4 +8,6 @@ enum UserDetailsError: Error {
 enum RepositoryDetailsAction: Equatable {
     case presentUserDetails
     case dismissUserDetails
+    case didAppear
+    case readMeIsLoaded(Result<String, SearchError>)
 }

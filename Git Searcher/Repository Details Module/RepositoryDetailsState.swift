@@ -5,11 +5,12 @@ struct RepositoryDetailsState: Equatable {
 //    var userName: String = ""
 //    var status: Status = .idle
     var model: RepositoryModel
+    var status: Status
     
-//    enum Status: Equatable {
-//        case idle
-//        case loading
-//        case userDataLoaded(GithubUser)
-//        case error(UserDetailsError)
-//    }
+    enum Status: Equatable {
+        case idle
+        case loading
+        case readMeIsLoaded(String)
+        case error(SearchError)
+    }
 }

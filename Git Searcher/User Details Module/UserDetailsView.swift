@@ -14,21 +14,45 @@ struct UserDetailsView: View {
     
     var body: some View {
         WithViewStore(store) { viewStore in
-            VStack {
-                switch viewStore.state.status {
-                case .idle:
-                    EmptyView()
-                case .loaded(let user):
-                    Text(user.login)
-                case .loading:
-                    ProgressView()
-                case .error(let error):
-                    Text(error.localizedDescription)
+            NavigationView {
+                List {
+                    switch viewStore.state.status {
+                    case .idle:
+                        EmptyView()
+                    case .loading:
+                        ProgressView()
+                    case .loaded(let user):
+                        UserView(model: user)
+                        SomeView(imageSystemName: "person.fill", title: "Username", value: user.login)
+                    case .error(let error):
+                        Text(error.localizedDescription)
+                    }
                 }
+                .onAppear {
+                    viewStore.send(.viewAppear)
+                }
+                .navigationTitle(viewStore.userName)
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .onAppear {
-                viewStore.send(.viewAppear)
+        }
+    }
+}
+
+struct UserView: View {
+    var model: GithubUser
+    
+    var body: some View {
+        Section {
+            AsyncImage(url: model.avatarUrl.flatMap { URL(string: $0) }) { image in
+                image.resizable()
+            } placeholder: {
+                ProgressView()
             }
+            .scaledToFit()
+            .cornerRadius(5)
+        }
+        Section {
+            SomeView(imageSystemName: "person.fill", title: "Username", value: model.login)
         }
     }
 }
@@ -36,14 +60,10 @@ struct UserDetailsView: View {
 struct UserDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         UserDetailsView(store: .init(
-            initialState: .init(userName: ""),
+            initialState: .init(userName: "Oleksandr"),
             reducer: userDetailsReducer,
             environment: .init(
                 getUserWithName: dummyGetUserEffect,
                 mainQueue: .main)))
     }
-}
-
-func dummyGetUserEffect(userName: String) -> Effect<GithubUser, UserDetailsError> {
-    .init(value: GithubUser(id: 435, login: "Stepan", name: "Marzepan", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine"))
 }

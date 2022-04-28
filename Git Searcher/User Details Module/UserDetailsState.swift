@@ -10,6 +10,7 @@ import Foundation
 struct UserDetailsState: Equatable {
     var userName: String
     var status: Status = .idle
+//    var model: GithubUser
     
     enum Status: Equatable {
         case idle

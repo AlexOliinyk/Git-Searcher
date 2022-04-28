@@ -43,3 +43,15 @@ struct GithubUser: Decodable, Equatable, Identifiable {
         self.location = location
     }
 }
+
+struct ReadMe: Decodable, Equatable {
+    let content: String
+    
+    var text: String {
+        let newContent = content.components(separatedBy: .whitespacesAndNewlines).joined()
+        guard let data = Data(base64Encoded: newContent) else {
+            return ""
+        }
+        return String(data: data, encoding: .utf8) ?? ""
+    }
+}
