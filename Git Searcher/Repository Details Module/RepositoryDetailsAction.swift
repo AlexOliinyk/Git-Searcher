@@ -1,5 +1,11 @@
 import Foundation
 
-public enum RepositoryDetailsAction: Equatable {
-    case idle
+enum UserDetailsError: Error {
+    case downloadError
+    case decodingError
+}
+
+enum RepositoryDetailsAction: Equatable {
+    case presentUserDetails
+    case dismissUserDetails
 }

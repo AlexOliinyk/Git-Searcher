@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct SearchState: Equatable {
+struct RepositorySearchState: Equatable {
     var searchText: String = ""
     var status: Status = .idle
     

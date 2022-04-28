@@ -25,5 +25,21 @@ struct RepositoryModel: Decodable, Equatable, Identifiable {
 struct GithubUser: Decodable, Equatable, Identifiable {
     let id: Int
     let login: String
+    let name: String?
     let avatarUrl: String?
+    let followers: Int?
+    let following: Int?
+    let bio: String?
+    let location: String?
+    
+    init(id: Int, login: String, name: String, avatarUrl: String? = nil, followers: Int, following: Int, bio: String, location: String) {
+        self.id = id
+        self.login = login
+        self.name = name
+        self.avatarUrl = nil
+        self.followers = followers
+        self.following = following
+        self.bio = bio
+        self.location = location
+    }
 }

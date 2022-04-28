@@ -10,7 +10,7 @@ import ComposableArchitecture
 import Combine
 
 struct RepositorySearchView: View {
-    let store: Store<SearchState, RepositorySearchAction>
+    let store: Store<RepositorySearchState, RepositorySearchAction>
     
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -35,7 +35,11 @@ struct RepositorySearchView: View {
                         Spacer()
                     case .dataLoaded(let models):
                         List(models) { model in
-                            NavigationLink(destination: RepositoryDetailsView(model: model), label: {
+                            NavigationLink(destination: RepositoryDetailsView(store: .init(
+                                                                                initialState: .init(model: model),
+                                                                                reducer: RepositoryDetailsReducer,
+                                                                                environment: .init())),
+                                           label: {
                                 RepositoryItemView(repository: model)
                             })
                         }
@@ -77,7 +81,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 let repositoriesMock: [RepositoryModel] = [
-    .init(id: 1, name: "SwiftUI", forksCount: 45, stargazersCount: 345, watchersCount: 2, owner: .init(id: 324, login: "Apple", avatarUrl: nil), language: "Swift"),
-    .init(id: 2, name: "Python", forksCount: 321, stargazersCount: 356, watchersCount: 2, owner: .init(id: 6325, login: "Apple", avatarUrl: nil), language: "Python"),
-    .init(id: 3, name: "JS", forksCount: 532, stargazersCount: 123, watchersCount: 2, owner: .init(id: 563432, login: "Apple", avatarUrl: nil), language: "Java"),
+    .init(id: 1, name: "SwiftUI", forksCount: 45, stargazersCount: 345, watchersCount: 2, owner: .init(id: 324, login: "Apple", name: "Swift", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine"), language: "Swift"),
+    .init(id: 2, name: "Python", forksCount: 321, stargazersCount: 356, watchersCount: 2, owner: .init(id: 6325, login: "Apple", name: "johny", avatarUrl: nil, followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine"), language: "Python"),
+    .init(id: 3, name: "JS", forksCount: 532, stargazersCount: 123, watchersCount: 2, owner: .init(id: 563432, login: "Apple", name: "FrontEnd", avatarUrl: nil, followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine"), language: "Java"),
 ]

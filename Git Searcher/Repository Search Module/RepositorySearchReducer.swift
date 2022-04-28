@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-let searchReducer = Reducer<SearchState, RepositorySearchAction, SearchEnvironment> { state, action, environment in
+let searchReducer = Reducer<RepositorySearchState, RepositorySearchAction, SearchEnvironment> { state, action, environment in
     
     switch action {
     case .search(let searchText):
