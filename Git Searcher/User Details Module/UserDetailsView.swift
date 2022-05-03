@@ -77,9 +77,7 @@ struct UserView: View {
             .sheet(isPresented: $showWebView) {
                 WebView(url: URL(string: model.htmlUrl)!)
             }
-        }
-        
-        Section {
+            
             Button {
                 showWebView.toggle()
             } label: {
