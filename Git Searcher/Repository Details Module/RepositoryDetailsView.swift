@@ -78,7 +78,7 @@ struct RepositoryDetailView_Previews: PreviewProvider {
         
         NavigationView {
             RepositoryDetailsView(store: .init(
-                initialState: .init(model: RepositoryModel(id: 421, name: "Sasha", forksCount: 123, stargazersCount: 42, watchersCount: 542, owner: .init(id: 654, login: "Sasha", name: "Oleksandr", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine"), language: "Swift"), status: .idle),
+                initialState: .init(model: RepositoryModel(id: 421, name: "Sasha", forksCount: 123, stargazersCount: 42, watchersCount: 542, owner: .init(id: 654, login: "Sasha", name: "Oleksandr", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine", htmlUrl: "", blog: ""), language: "Swift"), status: .idle),
                 reducer: RepositoryDetailsReducer,
                 environment: .init(getReadMe: dummyReadMe, mainQueue: .main)))
         }

@@ -31,8 +31,10 @@ struct GithubUser: Decodable, Equatable, Identifiable {
     let following: Int?
     let bio: String?
     let location: String?
+    let htmlUrl: String
+    let blog: String?
     
-    init(id: Int, login: String, name: String, avatarUrl: String? = nil, followers: Int, following: Int, bio: String, location: String) {
+    init(id: Int, login: String, name: String, avatarUrl: String? = nil, followers: Int, following: Int, bio: String, location: String, htmlUrl: String, blog: String) {
         self.id = id
         self.login = login
         self.name = name
@@ -41,6 +43,8 @@ struct GithubUser: Decodable, Equatable, Identifiable {
         self.following = following
         self.bio = bio
         self.location = location
+        self.htmlUrl = htmlUrl
+        self.blog = blog
     }
 }
 

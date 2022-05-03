@@ -68,11 +68,11 @@ struct RepositoryItemView: View {
 struct RepositoryListView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RepositoryItemView(repository: RepositoryModel(id: 342, name: "Swift", forksCount: 34, stargazersCount: 456, watchersCount: 234, owner: .init(id: 663, login: "Yen", name: "Stoltenberg", avatarUrl: "https://avatars.githubusercontent.com/u/7872329?v=4", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine"), language: "Swift"))
+            RepositoryItemView(repository: RepositoryModel(id: 342, name: "Swift", forksCount: 34, stargazersCount: 456, watchersCount: 234, owner: .init(id: 663, login: "Yen", name: "Stoltenberg", avatarUrl: "https://avatars.githubusercontent.com/u/7872329?v=4", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine", htmlUrl: "", blog: ""), language: "Swift"))
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.light)
             
-            RepositoryItemView(repository: RepositoryModel(id: 342, name: "Swift", forksCount: 34, stargazersCount: 456, watchersCount: 234, owner: .init(id: 663, login: "Yen", name: "Blobal", avatarUrl: "https://avatars.githubusercontent.com/u/7872329?v=4", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine"), language: "Java"))
+            RepositoryItemView(repository: RepositoryModel(id: 342, name: "Swift", forksCount: 34, stargazersCount: 456, watchersCount: 234, owner: .init(id: 663, login: "Yen", name: "Blobal", avatarUrl: "https://avatars.githubusercontent.com/u/7872329?v=4", followers: 352, following: 23, bio: "fdfds fwef fsfewf", location: "Kyiv, Ukraine", htmlUrl: "", blog: ""), language: "Java"))
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)
         }
