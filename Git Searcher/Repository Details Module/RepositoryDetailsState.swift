@@ -5,7 +5,7 @@ struct RepositoryDetailsState: Equatable {
 //    var userName: String = ""
 //    var status: Status = .idle
     var model: RepositoryModel
-    var status: Status
+    var status: Status = .idle
     
     enum Status: Equatable {
         case idle
