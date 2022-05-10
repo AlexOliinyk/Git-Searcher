@@ -78,13 +78,15 @@ struct UserView: View {
                 WebView(url: URL(string: model.htmlUrl)!)
             }
             
-            Button {
-                showWebView.toggle()
-            } label: {
-                SomeView(imageSystemName: "network", title: "blog", value: model.blog ?? "Not Found")
-            }
-            .sheet(isPresented: $showWebView) {
-                WebView(url: URL(string: model.blog!)!)
+            if model.blog!.count > 0 {
+                Button {
+                    showWebView.toggle()
+                } label: {
+                    SomeView(imageSystemName: "network", title: "blog", value: model.blog ?? "Not Found")
+                }
+                .sheet(isPresented: $showWebView) {
+                    WebView(url: URL(string: model.blog!)!)
+                }
             }
         }
     }
