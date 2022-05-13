@@ -11,4 +11,5 @@ import ComposableArchitecture
 struct SearchEnvironment {
     var repositorySearch: (String) -> Effect<[RepositoryModel], SearchError>
     var mainQueue: DispatchQueue
+//    var repositoryDetailsEnvironment: RepositoryDetailsEnvironment
 }

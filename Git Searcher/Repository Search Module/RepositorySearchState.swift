@@ -10,6 +10,9 @@ import ComposableArchitecture
 
 struct RepositorySearchState: Equatable {
     var searchText: String = ""
+    var selectedDetailsState: RepositoryDetailsState?
+    var recentRepository: RepositoryDetailsState?
+    var isShowingRecentRepository = false
     var status: Status = .idle
     
     enum Status: Equatable {

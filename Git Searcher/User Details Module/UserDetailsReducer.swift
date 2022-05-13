@@ -20,7 +20,6 @@ let userDetailsReducer = Reducer<UserDetailsState, UserDetailsAction, UserDetail
             .catchToEffect()
             .map(UserDetailsAction.userDataIsLoaded)
     case .userDataIsLoaded(.success(let user)):
-//        state.model = user
         state.status = .loaded(user)
         return .none
     case .userDataIsLoaded(.failure(let error)):

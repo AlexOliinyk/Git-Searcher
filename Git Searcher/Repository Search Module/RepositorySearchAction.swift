@@ -17,4 +17,10 @@ enum RepositorySearchAction: Equatable {
     
     case search(String)
     case dataIsLoaded(Result<[RepositoryModel], SearchError>)
+    case goToRepositoryDetails(RepositoryDetailsState)
+    case dismissRepositoryDetails
+    case details(RepositoryDetailsAction)
+//    case testProgramNavigation
+    case showRecentRepository
+    case dismissRecentRepository
 }

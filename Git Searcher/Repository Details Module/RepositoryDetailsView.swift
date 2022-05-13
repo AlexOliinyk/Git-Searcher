@@ -47,7 +47,9 @@ struct RepositoryDetailsView: View {
                     }
                 }
             }
-            .onAppear { viewStore.send(.didAppear) }
+            .onAppear {
+                viewStore.send(.didAppear)
+            }
         }
     }
 }

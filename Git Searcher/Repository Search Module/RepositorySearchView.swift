@@ -35,16 +35,32 @@ struct RepositorySearchView: View {
                         Spacer()
                     case .dataLoaded(let models):
                         List(models) { model in
-                            NavigationLink(destination: RepositoryDetailsView(store: .init(
-                                initialState: .init(model: model, status: .idle),
-                                                                                reducer: RepositoryDetailsReducer,
-                                environment: .init(getReadMe: readMeEffect, mainQueue: .main))),
-                                           label: {
-                                RepositoryItemView(repository: model)
-                            })
+                            NavigationLink(
+                                isActive: viewStore.binding(
+                                    get: { state in
+                                        state.selectedDetailsState?.model == model
+                                    },
+                                    send: { state in
+                                        if state {
+                                            return .goToRepositoryDetails(.init(model: model))
+                                        } else {
+                                            return .dismissRepositoryDetails
+                                        }
+                                    }),
+                                destination: {
+                                    IfLetStore(store.scope(
+                                        state: \.selectedDetailsState,
+                                        action: RepositorySearchAction.details
+                                    )) { store in
+                                        RepositoryDetailsView(
+                                            store: store)
+                                    }
+                                },
+                                label: {
+                                    RepositoryItemView(repository: model)
+                                })
                         }
                         .listStyle(PlainListStyle())
-                        
                     case .emptyResult:
                         Spacer()
                         Text("We didn't find anything for you...")
@@ -58,6 +74,31 @@ struct RepositorySearchView: View {
                 }
                 .navigationTitle("Search Repository")
                 .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing: IfLetStore(store.scope(
+                    state: \.recentRepository,
+                    action: RepositorySearchAction.details
+                )) { store in
+                    NavigationLink(
+                        isActive: viewStore.binding(
+                            get: \.isShowingRecentRepository,
+                            send: { state in
+                                if state {
+                                    return .showRecentRepository
+                                } else {
+                                    return .dismissRecentRepository
+                                }
+                            }),
+                        destination: {
+                            RepositoryDetailsView(store: store)
+                        },
+                        label: {
+                            Text("To the last repo")
+                                .font(.caption)
+                                .padding()
+                                .background(.yellow)
+                                .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
+                        })
+                })
             }
         }
     }
